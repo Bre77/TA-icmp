@@ -91,6 +91,7 @@ class Input(Script):
         await asyncio.wait(tasks_pending)
 
     async def ping_print(self, address, asset, count, timeout, ew, sourcetype):
+        data = None
         try:
             result = await async_ping(address=address,count=count,timeout=timeout,privileged=True)
             source = result.address
@@ -101,13 +102,17 @@ class Input(Script):
         except ICMPLibError as e:
             source = e.__class__.__name__
             ew.log(EventWriter.ERROR,f"TA-icmp address=\"{address}\" asset=\"{asset}\" error=\"{e.__class__.__name__}\" message=\"{e}\"")
-            data = f"{asset}:0/0"
+            if(sourcetype !== "icmp:metric"):
+                data = f"{asset}:0/0"
+            else:
+                data = f"{asset}:0/0"
         except Exception as e:
             ew.log(EventWriter.ERROR,f"TA-icmp address=\"{address}\" asset=\"{asset}\" error=\"{e.__class__.__name__}\" message=\"{e}\"")
-        ew.write_event(Event(
-            data=data,
-            source=source,
-        ))
+        if data:
+            ew.write_event(Event(
+                data=data,
+                source=source,
+            ))
 
 if __name__ == '__main__':
     exitcode = Input().run(sys.argv)

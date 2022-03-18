@@ -114,4 +114,4 @@ class Input(Script):
 
 if __name__ == '__main__':
     exitcode = Input().run(sys.argv)
-    sys.exit(exitcode)
+    sys.exit(exitcode)W

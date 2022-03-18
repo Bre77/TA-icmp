@@ -104,10 +104,9 @@ class Input(Script):
             ew.log(EventWriter.ERROR,f"TA-icmp address=\"{address}\" asset=\"{asset}\" error=\"{e.__class__.__name__}\" message=\"{e}\"")
             if(sourcetype !== "icmp:metric"):
                 data = f"{asset}:0/0"
-            else:
-                data = f"{asset}:0/0"
         except Exception as e:
             ew.log(EventWriter.ERROR,f"TA-icmp address=\"{address}\" asset=\"{asset}\" error=\"{e.__class__.__name__}\" message=\"{e}\"")
+        
         if data:
             ew.write_event(Event(
                 data=data,

@@ -93,7 +93,7 @@ class Input(Script):
     async def ping_print(self, address, asset, count, timeout, ew, sourcetype):
         data = None
         try:
-            result = await async_ping(address=address,count=count,timeout=timeout,privileged=True)
+            result = await async_ping(address=address,count=count,timeout=timeout,privileged=False)
             source = result.address
             if(sourcetype == "icmp:metric"):
                 data = f"{asset}:{result.packets_received}/{result.packets_sent}:{format(result.min_rtt, '.3f')}:{format(result.avg_rtt, '.3f')}:{format(result.max_rtt, '.3f')}"

@@ -6,7 +6,7 @@
 
         https://github.com/ValentinBELYN/icmplib
 
-    :copyright: Copyright 2017-2021 Valentin BELYN.
+    :copyright: Copyright 2017-2022 Valentin BELYN.
     :license: GNU LGPLv3, see the LICENSE for details.
 
     ~~~~~~~
@@ -269,7 +269,7 @@ class ICMPSocket:
                 payload=request.payload)
 
             self._set_ttl(request.ttl)
-            #self._set_traffic_class(request.traffic_class)
+            self._set_traffic_class(request.traffic_class)
 
             request._time = time()
             self._sock.sendto(packet, sock_destination)
@@ -355,6 +355,23 @@ class ICMPSocket:
         if self._sock:
             self._sock.close()
             self._sock = None
+
+    @property
+    def sock(self):
+        '''
+        Return the underlying socket (`socket.socket` object) or `None`
+        if the socket is closed.
+
+        This property should only be used if the feature you want is not
+        yet implemented. Some changes made to this socket may cause
+        unexpected behavior or be incompatible with later versions of
+        the library.
+
+        Prefer to use the other methods and properties defined within
+        this class if possible.
+
+        '''
+        return self._sock
 
     @property
     def blocking(self):

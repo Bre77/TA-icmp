@@ -1,0 +1,6 @@
+{
+    "name": "TA-icmp",
+    "version": "1.0.0",
+    "splunkbaseid": 6224,
+    "license": "https://cdn.splunkbase.splunk.com/static/misc/eula.html"
+}

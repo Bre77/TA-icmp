@@ -6,7 +6,7 @@ import time
 import asyncio
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
-from splunklib.modularinput import *
+from splunk_input_runtime.modularinput import Argument, Event, EventWriter, Scheme, Script
 from icmplib.ping import async_ping
 from icmplib import ICMPLibError
 
@@ -53,7 +53,6 @@ class Input(Script):
         return scheme
 
     def stream_events(self, inputs, ew):
-        self.service.namespace['app'] = self.APP
         # Get Variables
         input_name, input_items = inputs.inputs.popitem()
         kind, name = input_name.split("://")
